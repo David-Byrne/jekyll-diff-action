@@ -1,0 +1,7 @@
+name: Jekyll diff
+author: David Byrne
+description: Generates a diff of the 2 versions of the built Jekyll site and comments it back to Github
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
