@@ -26,8 +26,8 @@ If you don't want the action to run on both commits and PRs, remove whichever tr
 And that's pretty much it! From now on, any changes you make on GitHub should have a comment showing their impact on the final version of your site, like this:
 
 ``` diff
---- /tmp/old/feed.xml
-+++ /tmp/new/feed.xml
+--- /tmp/old/hello.html
++++ /tmp/new/hello.html
 @@ -1 +1 @@
 -<h1>hello world</h1>
 +<h1>Hello World!/h1>
