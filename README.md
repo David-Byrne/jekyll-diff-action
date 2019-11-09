@@ -30,7 +30,7 @@ And that's pretty much it! From now on, any changes you make on GitHub should ha
 +++ /tmp/new/hello.html
 @@ -1 +1 @@
 -<h1>hello world</h1>
-+<h1>Hello World!/h1>
++<h1>Hello World!</h1>
 ```
 
 While simple markdown updates usually result in trivial HTML changes, (e.g. the diff above), bumping dependencies or adding new plugins can cause many hard to detect issues. This is where jekyll-diff-action really shines, nothing on your site changes without your knowledge.
