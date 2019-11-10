@@ -5,6 +5,6 @@ USER root
 
 RUN apk --no-cache add curl jq
 
-COPY ./gen_diff.sh /
+COPY ./jekyll_diff.sh /
 
-CMD /gen_diff.sh
+CMD /jekyll_diff.sh
