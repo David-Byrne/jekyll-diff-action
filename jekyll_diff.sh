@@ -26,9 +26,11 @@ fi
 ####################################################
 
 cd /github/workspace
-jekyll build --destination /tmp/new/
+mkdir -p .jekyll-cache # workaround for https://github.com/jekyll/jekyll/issues/7591
+
+jekyll build --trace --destination /tmp/new/
 git checkout $common_ancestor_sha
-jekyll build --destination /tmp/old
+jekyll build --trace --destination /tmp/old
 diff="$(diff --recursive --new-file --unified=0 /tmp/old /tmp/new || true)" # 'or true' because a non-identical diff outputs 1 as the exit status
 
 
