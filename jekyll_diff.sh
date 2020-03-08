@@ -7,6 +7,19 @@ echo "Starting Jekyll diff script"
 
 
 ####################################################
+# Create workspace for Jekyll Diff Action
+####################################################
+
+mkdir /jekyll-diff-action
+mkdir /jekyll-diff-action/new
+mkdir /jekyll-diff-action/old
+mkdir /jekyll-diff-action/workspace
+cp --archive /github/workspace/. /jekyll-diff-action/workspace
+chmod -R a+w /jekyll-diff-action
+cd /jekyll-diff-action/workspace
+
+
+####################################################
 # Determine whether it's a PR or Commit
 ####################################################
 
@@ -25,13 +38,10 @@ fi
 # Build both site versions and determine diff
 ####################################################
 
-cd /github/workspace
-mkdir -p .jekyll-cache # workaround for https://github.com/jekyll/jekyll/issues/7591
-
-jekyll build --trace --destination /tmp/new/
-git checkout $common_ancestor_sha
-jekyll build --trace --destination /tmp/old
-diff="$(diff --recursive --new-file --unified=0 /tmp/old /tmp/new || true)" # 'or true' because a non-identical diff outputs 1 as the exit status
+jekyll build --trace --destination /jekyll-diff-action/new
+git checkout --force $common_ancestor_sha
+jekyll build --trace --destination /jekyll-diff-action/old
+diff="$(diff --recursive --new-file --unified=0 /jekyll-diff-action/old /jekyll-diff-action/new || true)" # 'or true' because a non-identical diff outputs 1 as the exit status
 
 
 ####################################################
