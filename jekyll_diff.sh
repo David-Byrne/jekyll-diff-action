@@ -25,7 +25,7 @@ cd /jekyll-diff-action/workspace
 
 if [ "$GITHUB_EVENT_NAME" = "pull_request" ]; then
     echo "PR mode"
-    common_ancestor_sha="$(git merge-base $GITHUB_SHA origin/master)" # find the closest common ancestor between the PR branch and master
+    common_ancestor_sha="$(git merge-base $GITHUB_SHA origin/$GITHUB_BASE_REF)" # find the closest common ancestor between the PR branch and the target branch
     api_url="$(cat $GITHUB_EVENT_PATH | jq --raw-output '.pull_request.comments_url')"
 else
     echo "Commit mode"
