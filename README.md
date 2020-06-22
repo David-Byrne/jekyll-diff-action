@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: David-Byrne/jekyll-diff-action@v1.2.0
+    - uses: David-Byrne/jekyll-diff-action@v1.3.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
