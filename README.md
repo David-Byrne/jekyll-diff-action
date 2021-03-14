@@ -16,18 +16,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - uses: David-Byrne/jekyll-diff-action@v1.3.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: jekyll-site.diff
+        path: jekyll-site.diff
 ```
 
-If you don't want the action to run on both commits and PRs, remove whichever trigger you don't need. The `GITHUB_TOKEN` is required to allow the action comment the diff back on GitHub.
+The `GITHUB_TOKEN` is required for the action to comment the diff back on GitHub. If you don't want the action to run on both commits and PRs, remove whichever trigger you don't need. If you need to support PRs from forks, use `pull_request_target` as the trigger, but remove the `GITHUB_TOKEN` since secrets should not be injected into an untrusted build. The diff will still be available in the `jekyll-site.diff` artefact of the build.
 
 And that's pretty much it! From now on, any changes you make on GitHub should have a comment showing their impact on the final version of your site, like this:
 
 ``` diff
---- /tmp/old/hello.html
-+++ /tmp/new/hello.html
+--- /jekyll-diff-action/old/hello.html
++++ /jekyll-diff-action/new/hello.html
 @@ -1 +1 @@
 -<h1>hello world</h1>
 +<h1>Hello World!</h1>
